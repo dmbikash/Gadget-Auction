@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "751781491266",
+    "project_id": "appebay-375a3",
+    "storage_bucket": "appebay-375a3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:751781491266:android:bacaf1b18a35cb26b2b3db",
+        "android_client_info": {
+          "package_name": "com.bikash.app_ebay"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "751781491266-m03m6tmfog7lfi2ud0f0vs1abr7uqt2q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDszlm88yvYaCffWQl2r7boeL46Vd_jqwo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "751781491266-m03m6tmfog7lfi2ud0f0vs1abr7uqt2q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
