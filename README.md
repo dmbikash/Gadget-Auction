@@ -8,8 +8,7 @@ The challenges I haveve faced during making the project are:
 
 
 
-        1.As  a new frame-work there are very few reading materials as well 
-        as watching materials can be found, it was challenging to learn a new framework.
+        1.t was challenging to work with flutter and firebase. There were a few useful and authentic resourses and reading materials for flutter.
         The necessary information were taken from stack over flow, flutter official website
         (flutter.org) and YouTube.
 
