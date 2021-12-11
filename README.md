@@ -1,6 +1,8 @@
 # ebay_app-with-flutter
 I have made ebay type auction app with Flutter and Firebase.
-This is apk link:https://drive.google.com/drive/folders/1Pwin6ugtZmehiHyVm5A4-I21tf1WiBwJ?usp=sharing .
+I have uploaded all the necessary codes.
+The apk file will be found in 'Download and install apk' folder.
+You can also find the apk here in the drive link: https://drive.google.com/drive/folders/1Pwin6ugtZmehiHyVm5A4-I21tf1WiBwJ?usp=sharing .
 I have completed Task 1,2,3,4,5,6 and 7
 The challenges I haveve faced during making the project are:
 
