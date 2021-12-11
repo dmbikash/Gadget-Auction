@@ -2,17 +2,20 @@
 
 
 import 'package:app_ebay/controllers/data_controller.dart';
-import 'package:app_ebay/screens/home/drawer.dart';
+import 'package:app_ebay/shared/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 
-class UserProduct extends StatelessWidget {
+class UserProduct extends StatefulWidget {
+  @override
+  State<UserProduct> createState() => _UserProductState();
+}
+
+class _UserProductState extends State<UserProduct> {
   final DataController controller = Get.find();
-
-
-
+ bool loading=false;
 
   @override
   Widget build(BuildContext context) {
@@ -22,10 +25,23 @@ class UserProduct extends StatelessWidget {
 
 
 
-    return Scaffold(
+    return loading? Loading() : Scaffold(
       appBar: AppBar(
         title:Text('My uploaded products'),
         backgroundColor: Colors.teal,
+        actions: [
+          IconButton(
+              onPressed: () async{
+                setState(() {
+                  loading=true;
+                });
+                await Future.delayed(const Duration(seconds: 1), (){});
+                setState(() {
+                  loading=false;
+                });
+              },
+              icon: Icon(Icons.refresh_outlined))
+        ],
       ),
       body: GetBuilder<DataController>(
         builder: (controller) => controller.loginUserData.isEmpty

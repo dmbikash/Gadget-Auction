@@ -56,7 +56,8 @@ class _Product_image_pickerState extends State<Product_image_picker> {
             fit: BoxFit.cover,
           )
               : Image.network(
-            'https://static.thenounproject.com/png/2413564-200.png',
+            //'https://static.thenounproject.com/png/2413564-200.png',
+            'https://cdn-icons-png.flaticon.com/128/3342/3342119.png',
             fit: BoxFit.cover,
           ),
         ),
@@ -120,6 +121,9 @@ class _Product_image_pickerState extends State<Product_image_picker> {
 
           icon: Icon(Icons.image),
           label: Text('Add Image'),
+          style: ElevatedButton.styleFrom(
+        primary:Colors.teal[300],
+          ),
         ),
       ],
     );

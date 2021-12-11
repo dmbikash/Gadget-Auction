@@ -1,23 +1,25 @@
 import 'package:app_ebay/controllers/data_controller.dart';
-import 'package:app_ebay/screens/authenticate/sign_in.dart';
-import 'package:app_ebay/screens/home/user_product.dart';
+import 'package:app_ebay/shared/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
-import 'package:get/get_navigation/src/extension_navigation.dart';
-import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 
-class AppDrawer extends StatelessWidget {
-  final DataController controller =Get.find() ;
+class AppDrawer extends StatefulWidget {
+  @override
+  State<AppDrawer> createState() => _AppDrawerState();
+}
 
+class _AppDrawerState extends State<AppDrawer> {
+  final DataController controller =Get.find() ;
+  bool loading=false;
 
   @override
   Widget build(BuildContext context) {
-    final user = FirebaseAuth.instance.currentUser;
+    //final user = FirebaseAuth.instance.currentUser;
 
-    return SafeArea(
+    return loading? Loading() :SafeArea(
       child: Container(
         color:Colors.teal,
         width: 220,
@@ -43,7 +45,8 @@ class AppDrawer extends StatelessWidget {
               ListTile(
                 leading: Icon(Icons.person),
                 title: const Text('Your Product'),
-                onTap: () {
+                onTap: ()  {
+
                   Navigator.pushNamed(context, '/myProduct');
 
 

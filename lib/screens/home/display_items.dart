@@ -1,15 +1,12 @@
 
-import 'package:app_ebay/model/add_product.dart';
+
 import 'package:app_ebay/screens/home/drawer.dart';
+import 'package:app_ebay/shared/loading.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:app_ebay/services/storage_service.dart';
-import 'package:file_picker/file_picker.dart';
-import 'package:flutter/material.dart';
 import 'package:app_ebay/controllers/data_controller.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
-import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 
 class BidItems extends StatefulWidget {
@@ -22,6 +19,7 @@ class BidItems extends StatefulWidget {
 
 class _BidItemsState extends State<BidItems> {
 
+   bool loading =false;
 
   dynamic userdata = {};
 
@@ -36,18 +34,33 @@ class _BidItemsState extends State<BidItems> {
     print('--------------------------');
     print(userdata);
 
-    return Scaffold(
+    return loading? Loading() :Scaffold(
       drawer:AppDrawer(),
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: Colors.teal[500],
-        title: Text('Auction Page'),
+        title: Text('Auction Gallery'),
         actions: [
           IconButton(
-              onPressed: () {
-                Navigator.pushNamed(context, "/add_product");
+              onPressed: () async {
+                setState(() {
+
+                });
+                setState(() {
+                  loading=true;
+                });
+                await Future.delayed(const Duration(seconds: 2), (){});
+                setState(() {
+                  loading=false;
+                });
+
+
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('Page refreshed')),
+                );
+
               },
-              icon: Icon(Icons.add))
+              icon: Icon(Icons.refresh_outlined))
         ],
       ),
       body: GetBuilder<DataController>(
@@ -71,16 +84,22 @@ class _BidItemsState extends State<BidItems> {
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Row(
+                    child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        Text(
-                          "Product Name: ${controller.allProduct[index].productname}",
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                        Align(
+                          alignment:Alignment.centerLeft,
+                          child: Text(
+                            "Product Name: ${controller.allProduct[index].productname}",
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
                         ),
-                        Text(
-                          'Minimum bid Price: ${controller.allProduct[index].productprice.toString()}',
-                          style: TextStyle(fontWeight: FontWeight.bold,),
+                        Align(
+                          alignment:Alignment.centerLeft,
+                          child: Text(
+                            'Minimum bid Price: ${controller.allProduct[index].productprice.toString()}',
+                            style: TextStyle(fontWeight: FontWeight.bold,),
+                          ),
                         ),
                       ],
                     ),
@@ -92,20 +111,49 @@ class _BidItemsState extends State<BidItems> {
                       children: [
                         Expanded(
                           child: ElevatedButton(
-                            style:  ElevatedButton.styleFrom(primary:Colors.teal[400] ),
+                            style:  ElevatedButton.styleFrom(primary:Colors.teal[300] ),
                             onPressed: () {
-                              Navigator.pushNamed(context, '/bidpage',arguments:
-                              {
-                                "product_name":controller.allProduct[index].productname,
-                                "auc_price":controller.allProduct[index].productprice.toString(),
-                                'img':controller.allProduct[index].productimage,
-                                'description':controller.allProduct[index].description,
+                              if(controller.allProduct[index].product_status == 'pending'){
+                                print("xxxxxxxx----------@@@@@@@@@@@@");
+                                print(controller.allProduct[index]);
+                                print(controller.userProfileData['userName']);
+                                Navigator.pushNamed(context, '/bidpage',arguments:
+                                {
+                                  "product_name":controller.allProduct[index].productname,
+                                  "bid_price":controller.allProduct[index].productprice.toString(),
+                                  'img':controller.allProduct[index].productimage,
+                                  'description':controller.allProduct[index].description,
+                                  'auc_date':controller.allProduct[index].auc_date,
+                                  'product_owner_email':controller.allProduct[index].product_owner_email,
+                                  'bidder_name':controller.userProfileData['userName'],
+                                  'product_id':controller.allProduct[index].productId,
 
-                              });
+
+                                });
+
+                              }else{
+                                Navigator.pushNamed(context, '/winner',arguments:
+                                {
+                                  "product_name":controller.allProduct[index].productname,
+                                  //"bid_price":controller.allProduct[index].productprice.toString(),
+                                  'img':controller.allProduct[index].productimage,
+                                  //'description':controller.allProduct[index].description,
+                                  //'auc_date':controller.allProduct[index].auc_date,
+                                  //'product_owner_email':controller.allProduct[index].product_owner_email,
+                                  //'bidder_name':controller.userProfileData['userName'],
+                                  'product_id':controller.allProduct[index].productId,
+
+
+                                });
+
+                              }
                             },
                             //=> launch(
                             //    "tel:${controller.allProduct[index].phonenumber.toString()}"),
-                            child: Text('Bid this product'),
+                            child: Text('Bid this product',
+                            style:TextStyle(
+                              fontSize: 17,
+                            ),),
                           ),
                         ),
                       ],
@@ -117,9 +165,19 @@ class _BidItemsState extends State<BidItems> {
           },
         ),
       ),
+     floatingActionButton: FloatingActionButton(
 
+       onPressed: ()
+       {
+         Navigator.pushNamed(context, "/add_product");
+       },
+       backgroundColor: Colors.teal[500],
+       child: const Icon(Icons.add),
+
+     ),
 
 
     );
+
   }
 }

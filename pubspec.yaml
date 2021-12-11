@@ -47,6 +47,10 @@ dependencies:
   #pick image
   image_picker: ^0.8.4+4
   bottom_sheet: ^1.0.4
+  #date time format:
+  intl: ^0.17.0
+  #loading spin kit
+  flutter_spinkit: ^5.1.0
 
 
 

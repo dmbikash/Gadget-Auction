@@ -1,5 +1,7 @@
+import 'package:app_ebay/screens/home/bidlist.dart';
 import 'package:app_ebay/screens/home/bidpage.dart';
 import 'package:app_ebay/screens/home/user_product.dart';
+import 'package:app_ebay/screens/home/winner.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:app_ebay/services/auth.dart';
@@ -18,7 +20,7 @@ Future main() async{
 
 
 class MyApp extends StatelessWidget {
-  //const MyApp({Key? key}) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) =>ChangeNotifierProvider(
@@ -31,6 +33,8 @@ class MyApp extends StatelessWidget {
           "/display_items_and_bid":(context)=>BidItems(),
           "/add_product":(context)=>AddProdusctScreen(),
           '/myProduct':(context) =>UserProduct(),
+          '/bidlist':(context) =>Bidlist(),
+          '/winner':(context)=>Winner(),
         },
       debugShowCheckedModeBanner:false,
     //title:title,
